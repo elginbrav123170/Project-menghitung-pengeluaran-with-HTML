@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Spending Tracker</title>
+  <link rel="stylesheet" href="app.css" />
+</head>
+<body>
+
+  <!-- Storage warning banner -->
+  <div id="storage-warning" class="storage-warning hidden">
+    Warning: Local storage is unavailable. Your data will not be saved between sessions.
+  </div>
+
+  <header>
+    <h1>Spending Tracker</h1>
+    <nav class="tab-nav">
+      <button class="tab-btn active" data-tab="expenses">Pengeluaran</button>
+      <button class="tab-btn" data-tab="income">Pemasukan</button>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- ── EXPENSES TAB ── -->
+    <div id="tab-expenses" class="tab-content">
+
+      <!-- Expense Form -->
+      <section id="expense-form-section" class="card">
+        <h2>Tambah Pengeluaran</h2>
+        <form id="expense-form" novalidate>
+          <div class="form-group">
+            <label for="amount">Jumlah (Rp)</label>
+            <input type="number" id="amount" name="amount" min="1" step="1" placeholder="0" />
+            <span class="field-error" id="amount-error"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="category">Kategori</label>
+            <select id="category" name="category">
+              <option value="">-- Pilih kategori --</option>
+            </select>
+            <span class="field-error" id="category-error"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="date">Tanggal</label>
+            <input type="date" id="date" name="date" />
+            <span class="field-error" id="date-error"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="description">Keterangan <span class="optional">(opsional)</span></label>
+            <input type="text" id="description" name="description" placeholder="Untuk apa?" />
+          </div>
+
+          <button type="submit">Tambah Pengeluaran</button>
+        </form>
+
+        <div class="add-category">
+          <h3>Tambah Kategori</h3>
+          <div class="inline-group">
+            <input type="text" id="new-category" placeholder="Nama kategori baru" />
+            <button id="add-category-btn">Tambah</button>
+          </div>
+          <span class="field-error" id="category-add-error"></span>
+        </div>
+      </section>
+
+      <!-- Expense List -->
+      <section id="expense-list-section" class="card">
+        <h2>Daftar Pengeluaran</h2>
+        <ul id="expense-list"></ul>
+        <p id="no-expenses-msg" class="empty-msg">Belum ada pengeluaran.</p>
+      </section>
+
+    </div>
+
+    <!-- ── INCOME TAB ── -->
+    <div id="tab-income" class="tab-content hidden">
+
+      <!-- Income Form -->
+      <section id="income-form-section" class="card">
+        <h2>Tambah Pemasukan</h2>
+        <form id="income-form" novalidate>
+          <div class="form-group">
+            <label for="income-amount">Jumlah (Rp)</label>
+            <input type="number" id="income-amount" name="income-amount" min="1" step="1" placeholder="0" />
+            <span class="field-error" id="income-amount-error"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="income-source">Sumber</label>
+            <select id="income-source" name="income-source">
+              <option value="">-- Pilih sumber --</option>
+            </select>
+            <span class="field-error" id="income-source-error"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="income-date">Tanggal</label>
+            <input type="date" id="income-date" name="income-date" />
+            <span class="field-error" id="income-date-error"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="income-description">Keterangan <span class="optional">(opsional)</span></label>
+            <input type="text" id="income-description" name="income-description" placeholder="Keterangan tambahan" />
+          </div>
+
+          <button type="submit">Tambah Pemasukan</button>
+        </form>
+      </section>
+
+      <!-- Income List -->
+      <section id="income-list-section" class="card">
+        <h2>Daftar Pemasukan</h2>
+        <ul id="income-list"></ul>
+        <p id="no-income-msg" class="empty-msg">Belum ada pemasukan.</p>
+      </section>
+
+    </div>
+
+    <!-- ── SUMMARY PANELS (always visible) ── -->
+    <div id="summaries">
+
+      <!-- Daily Summary -->
+      <section id="daily-summary-section" class="card summary-panel">
+        <h2>Harian</h2>
+        <div class="form-group">
+          <label for="daily-date">Tanggal</label>
+          <input type="date" id="daily-date" />
+        </div>
+        <div class="summary-row">
+          <span class="summary-label income-label">Pemasukan</span>
+          <span id="daily-income-total" class="summary-value income-value">Rp 0</span>
+        </div>
+        <div class="summary-row">
+          <span class="summary-label expense-label">Pengeluaran</span>
+          <span id="daily-total" class="summary-value expense-value">Rp 0</span>
+        </div>
+        <div class="summary-row net-row">
+          <span class="summary-label">Saldo</span>
+          <span id="daily-net" class="summary-value net-value">Rp 0</span>
+        </div>
+        <ul id="daily-breakdown" class="category-breakdown"></ul>
+      </section>
+
+      <!-- Monthly Summary -->
+      <section id="monthly-summary-section" class="card summary-panel">
+        <h2>Bulanan</h2>
+        <div class="form-group">
+          <label for="monthly-month">Bulan</label>
+          <input type="month" id="monthly-month" />
+        </div>
+        <div class="summary-row">
+          <span class="summary-label income-label">Pemasukan</span>
+          <span id="monthly-income-total" class="summary-value income-value">Rp 0</span>
+        </div>
+        <div class="summary-row">
+          <span class="summary-label expense-label">Pengeluaran</span>
+          <span id="monthly-total" class="summary-value expense-value">Rp 0</span>
+        </div>
+        <div class="summary-row net-row">
+          <span class="summary-label">Saldo</span>
+          <span id="monthly-net" class="summary-value net-value">Rp 0</span>
+        </div>
+        <ul id="monthly-breakdown" class="category-breakdown"></ul>
+      </section>
+
+      <!-- Yearly Summary -->
+      <section id="yearly-summary-section" class="card summary-panel">
+        <h2>Tahunan</h2>
+        <div class="form-group">
+          <label for="yearly-year">Tahun</label>
+          <input type="number" id="yearly-year" min="2000" max="2100" step="1" placeholder="YYYY" />
+        </div>
+        <div class="summary-row">
+          <span class="summary-label income-label">Pemasukan</span>
+          <span id="yearly-income-total" class="summary-value income-value">Rp 0</span>
+        </div>
+        <div class="summary-row">
+          <span class="summary-label expense-label">Pengeluaran</span>
+          <span id="yearly-total" class="summary-value expense-value">Rp 0</span>
+        </div>
+        <div class="summary-row net-row">
+          <span class="summary-label">Saldo</span>
+          <span id="yearly-net" class="summary-value net-value">Rp 0</span>
+        </div>
+        <ul id="yearly-breakdown" class="category-breakdown"></ul>
+      </section>
+
+    </div>
+  </main>
+
+  <script src="store.js"></script>
+  <script src="calculator.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
