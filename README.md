@@ -1,14 +1,14 @@
-content = """# 🌌 Expense Tracker: Finance in the Galaxy 🚀
+# 🌌 Expense Tracker: Deteksii Pengeluaran
 
 <div align="center">
-  <img src="https://komarev.com/ghpvc/?username=elginbrav&label=Project%20Views&color=8a2be2&style=flat" alt="Views" />
+  <img src="https://komarev.com/ghpvc/?username=elginbrav123170&label=Project%20Views&color=8a2be2&style=flat" alt="Views" />
   <img src="https://img.shields.io/badge/Maintained%3F-yes-green.svg" alt="Maintained" />
 </div>
 
 ---
 
 ### 📝 Deskripsi Proyek
-Proyek ini dikembangkan oleh **Elgin Brav Ekazatia**, mahasiswa Informatika UKDW, untuk membantu memantau aliran keuangan pribadi secara sistematis. Aplikasi ini memungkinkan pencatatan pengeluaran harian, bulanan, hingga tahunan agar manajemen finansial jadi lebih terukur dan tidak 'bocor' seperti *mana pool* yang habis.
+Proyek ini dikembangkan oleh **Elgin Brav Ekazatia**, mahasiswa Informatika UKDW, untuk membantu memantau aliran keuangan pribadi secara sistematis. Aplikasi ini memungkinkan pencatatan pengeluaran harian, bulanan, hingga tahunan agar manajemen finansial jadi lebih terukur dan tidak 'bocor' seperti saldo yang terkuras.
 
 ---
 
@@ -32,4 +32,4 @@ Proyek ini dikembangkan oleh **Elgin Brav Ekazatia**, mahasiswa Informatika UKDW
 ### 🚀 Cara Menjalankan
 1. **Clone repository ini:**
    ```bash
-   git clone [https://github.com/USERNAME_KAMU/expense-tracker-galaxy.git](https://github.com/elginbrav123170/Project-menghitung-pengeluaran-with-HTML.git)
+   git clone [https://github.com/elginbrav123170/Project-menghitung-pengeluaran-with-HTML.git]
